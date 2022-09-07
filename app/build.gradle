@@ -18,20 +18,31 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        release {
+            keyAlias 'testcicd'
+            keyPassword '159357'
+            storeFile file("testcicd.jks")
+            storePassword '159357'
+        }
+    }
+
     buildTypes {
         debug {
-            ndk {
-////                abiFilters "armeabi-v7a", "armeabi", "arm64-v8a", "x86", "x86_64"
-//                abiFilters "arm64-v8a","armeabi-v7a"
-////                abiFilters "arm64-v8a", "x86"
-//                abiFilters "arm64-v8a","armeabi-v7a"
-                abiFilters "x86"
+//            ndk {
+//////                abiFilters "armeabi-v7a", "armeabi", "arm64-v8a", "x86", "x86_64"
+////                abiFilters "arm64-v8a","armeabi-v7a"
+//////                abiFilters "arm64-v8a", "x86"
+////                abiFilters "arm64-v8a","armeabi-v7a"
+////                abiFilters "x86"
 //                abiFilters "armeabi-v7a"
-            }
+//            }
         }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            signingConfig signingConfigs.release
         }
     }
 
@@ -42,7 +53,7 @@ android {
             dimension "version"
 
             firebaseAppDistribution {
-                releaseNotes = "release_note_prod.txt"
+                releaseNotesFile = "app/release_note_prod.txt"
                 groups = "test"
             }
 
@@ -50,6 +61,7 @@ android {
         }
 
         dev {
+            applicationIdSuffix ".dev"
             dimension "version"
 
             firebaseAppDistribution {
