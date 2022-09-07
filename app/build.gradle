@@ -53,7 +53,7 @@ android {
             dimension "version"
 
             firebaseAppDistribution {
-                releaseNotes = "release_note_dev.txt"
+                releaseNotesFile = "app/release_note_dev.txt"
                 groups = "test"
             }
 
